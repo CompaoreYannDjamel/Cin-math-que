@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier un Film</title>
+    <!-- Inclure Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- Barre de navigation -->
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <!-- Contenu principal -->
+    <div class="container mx-auto mt-8">
+      <h1 class="text-2xl font-bold mb-4">Modifier un Film</h1>
+
+      <!-- Formulaire de modification de film -->
+      <form
+        th:action="@{/movies/{id}(id=${movie.id})}"
+        method="POST"
+        th:object="${movie}"
+        class="max-w-lg mx-auto bg-white p-8 rounded shadow-md"
+      >
+        <input type="hidden" name="id" th:value="${movie.id}" />
+        <div class="mb-4">
+          <label for="title" class="block text-gray-700 font-bold mb-2"
+            >Titre :</label
+          >
+          <input
+            type="text"
+            id="title"
+            name="title"
+            th:value="${movie.title}"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="description" class="block text-gray-700 font-bold mb-2"
+            >Description :</label
+          >
+          <textarea
+            id="description"
+            name="description"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+            th:text="${movie.description}"
+          ></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="releaseYear" class="block text-gray-700 font-bold mb-2"
+            >Année de sortie :</label
+          >
+          <input
+            type="number"
+            id="releaseYear"
+            name="releaseYear"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+            th:value="${movie.releaseYear}"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="gender" class="block text-gray-700 font-bold mb-2"
+            >Genre :</label
+          >
+          <input
+            type="text"
+            id="gender"
+            name="gender"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+            th:value="${movie.gender}"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="rentalPrice" class="block text-gray-700 font-bold mb-2"
+            >Prix de location :</label
+          >
+          <input
+            type="number"
+            id="rentalPrice"
+            name="rentalPrice"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+            th:value="${movie.rentalPrice}"
+          />
+        </div>
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Modifier
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

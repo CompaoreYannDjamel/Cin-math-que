@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Louer un Film</title>
+    <!-- Inclure Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- Barre de navigation -->
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <!-- Formulaire de location de film -->
+    <div class="container mx-auto mt-8">
+      <h1
+        class="text-2xl font-bold mb-4"
+        th:text="'Louer le film ' + ${movie.title}"
+      />
+
+      <form
+        action="/rentals/rent"
+        method="POST"
+        class="max-w-lg mx-auto bg-white p-8 rounded shadow-md"
+      >
+        <input type="hidden" name="movieId" th:value="${movie.id}" />
+        <input
+          type="hidden"
+          name="rentalPrice"
+          th:value="${movie.rentalPrice}"
+        />
+
+        <div class="mb-4">
+          <label for="firstName" class="block text-gray-700 font-bold mb-2"
+            >Prénom :</label
+          >
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="lastName" class="block text-gray-700 font-bold mb-2"
+            >Nom :</label
+          >
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="age" class="block text-gray-700 font-bold mb-2"
+            >Âge :</label
+          >
+          <input
+            type="number"
+            id="age"
+            name="age"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 font-bold mb-2"
+            >Email :</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="phoneNumber" class="block text-gray-700 font-bold mb-2"
+            >Numéro de Téléphone :</label
+          >
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="clientAddress" class="block text-gray-700 font-bold mb-2"
+            >Adresse :</label
+          >
+          <input
+            type="text"
+            id="clientAddress"
+            name="clientAddress"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
+        <!-- Autres champs spécifiques pour la location du film -->
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Louer
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

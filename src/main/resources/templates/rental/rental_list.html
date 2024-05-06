@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liste des Locations</title>
+    <!-- Inclure Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- Barre de navigation -->
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <!-- Contenu de la page des locations -->
+    <div class="container mx-auto mt-8">
+      <h1 class="text-2xl font-bold mb-4">Liste des Locations</h1>
+      <table class="min-w-full bg-white rounded">
+        <thead>
+          <tr>
+            <th
+              class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Client
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Film
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Date de Location
+            </th>
+            <th
+              class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Date de Fin
+            </th>
+            <th class="px-6 py-3 bg-gray-100"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Boucle sur les locations -->
+          <tr th:each="rental : ${rentals}">
+            <td
+              class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+              th:text="${rental.client.firstName + ' ' + rental.client.lastName}"
+            ></td>
+            <td
+              class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+              th:text="${rental.movie.title}"
+            ></td>
+            <td
+              class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+              th:text="${#dates.format(rental.rentalDate, 'dd/MM/yyyy HH:mm')}"
+            ></td>
+            <td
+              class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+              th:text="${#dates.format(rental.endDate, 'dd/MM/yyyy HH:mm')}"
+            ></td>
+            <td
+              class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200"
+            >
+              <a
+                href="/rentals/details/{id}"
+                th:href="@{/rentals/details/{id}(id=${rental.id})}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >Détails</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
